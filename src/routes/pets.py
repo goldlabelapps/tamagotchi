@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, render_template, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from src import game as game_logic
@@ -33,7 +33,12 @@ def create_pet():
 def list_pets():
     user_id = int(get_jwt_identity())
     pets = Pet.query.filter_by(user_id=user_id).all()
-    return jsonify({"pets": [p.to_dict() for p in pets]}), 200
+    pet_dicts = [p.to_dict() for p in pets]
+
+    best = request.accept_mimetypes.best_match(["application/json", "text/html"])
+    if best == "text/html":
+        return render_template("pets_list.html", pets=pet_dicts), 200
+    return jsonify({"pets": pet_dicts}), 200
 
 
 @pets_bp.get("/<int:pet_id>")
@@ -46,6 +51,10 @@ def get_pet(pet_id: int):
 
     result = game_logic.get_status(pet)
     db.session.commit()
+
+    best = request.accept_mimetypes.best_match(["application/json", "text/html"])
+    if best == "text/html":
+        return render_template("pet_detail.html", pet=result["pet"]), 200
     return jsonify(result), 200
 
 

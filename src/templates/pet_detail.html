@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}{{ pet.name }} - Pet Details{% endblock %}
+
+{% block content %}
+<TABLE BORDER="0" CELLPADDING="4" CELLSPACING="0" WIDTH="100%">
+  <TR BGCOLOR="#400040">
+    <TD><FONT FACE="Arial,Helvetica" COLOR="#FFFFFF" SIZE="+1"><B>&#9658; Pet Profile: {{ pet.name }}</B></FONT></TD>
+  </TR>
+</TABLE>
+
+<BR>
+
+<TABLE BORDER="0" CELLPADDING="4" CELLSPACING="4" WIDTH="100%">
+  <TR VALIGN="TOP">
+
+    <!-- Left: ASCII art + basic info -->
+    <TD WIDTH="28%" VALIGN="TOP">
+      <TABLE BORDER="1" CELLPADDING="8" CELLSPACING="0" WIDTH="100%" BGCOLOR="#FFFFCC" BORDERCOLOR="#400040">
+        <TR BGCOLOR="#400040">
+          <TD ALIGN="CENTER">
+            <FONT FACE="Arial,Helvetica" COLOR="#FFFFFF" SIZE="-1"><B>{{ pet.name }}</B></FONT>
+          </TD>
+        </TR>
+        <TR>
+          <TD ALIGN="CENTER">
+            <PRE><FONT FACE="Courier New,monospace" SIZE="-1">{% if pet.is_alive %}
+  .----.
+ / o  o \
+|  ----  |
+|  \__/  |
+ \      /
+  '----'
+ [ALIVE!]{% else %}
+  .----.
+ / x  x \
+|  ----  |
+|        |
+ \      /
+  '----'
+[DECEASED]{% endif %}</FONT></PRE>
+          </TD>
+        </TR>
+        <TR>
+          <TD>
+            <FONT FACE="Arial,Helvetica" SIZE="-2">
+            <B>ID:</B> {{ pet.id }}<BR>
+            <B>Age:</B> {{ pet.age }} hrs<BR>
+            <B>Created:</B> {{ pet.created_at[:10] if pet.created_at else 'N/A' }}<BR>
+            <B>Updated:</B> {{ pet.last_updated[:10] if pet.last_updated else 'N/A' }}
+            </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+
+    <!-- Right: Stats -->
+    <TD WIDTH="72%" VALIGN="TOP">
+      <TABLE BORDER="1" CELLPADDING="4" CELLSPACING="0" WIDTH="100%" BORDERCOLOR="#808080">
+        <TR BGCOLOR="#C0C0C0">
+          <TD COLSPAN="3">
+            <FONT FACE="Arial,Helvetica" SIZE="-1"><B>&#9658; Pet Statistics</B></FONT>
+          </TD>
+        </TR>
+
+        <!-- Health -->
+        <TR>
+          <TD WIDTH="18%"><FONT FACE="Arial,Helvetica" SIZE="-1"><B>Health</B></FONT></TD>
+          <TD WIDTH="64%">
+            <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+              <TR>
+                <TD WIDTH="{{ [pet.health|int, 1]|max }}%"
+                    BGCOLOR="{% if pet.health > 50 %}#00CC00{% elif pet.health > 20 %}#FF8800{% else %}#FF0000{% endif %}"
+                    HEIGHT="12"><FONT SIZE="-2">&nbsp;</FONT></TD>
+                <TD WIDTH="{{ [100 - pet.health|int, 0]|max }}%"
+                    BGCOLOR="#CCCCCC" HEIGHT="12"><FONT SIZE="-2">&nbsp;</FONT></TD>
+              </TR>
+            </TABLE>
+          </TD>
+          <TD WIDTH="18%" ALIGN="RIGHT"><FONT FACE="Arial,Helvetica" SIZE="-1">{{ pet.health }}%</FONT></TD>
+        </TR>
+
+        <!-- Hunger -->
+        <TR BGCOLOR="#F8F8F8">
+          <TD><FONT FACE="Arial,Helvetica" SIZE="-1"><B>Hunger</B></FONT></TD>
+          <TD>
+            <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+              <TR>
+                <TD WIDTH="{{ [pet.hunger|int, 1]|max }}%"
+                    BGCOLOR="#FF9900" HEIGHT="12"><FONT SIZE="-2">&nbsp;</FONT></TD>
+                <TD WIDTH="{{ [100 - pet.hunger|int, 0]|max }}%"
+                    BGCOLOR="#CCCCCC" HEIGHT="12"><FONT SIZE="-2">&nbsp;</FONT></TD>
+              </TR>
+            </TABLE>
+          </TD>
+          <TD ALIGN="RIGHT"><FONT FACE="Arial,Helvetica" SIZE="-1">{{ pet.hunger }}%</FONT></TD>
+        </TR>
+
+        <!-- Happiness -->
+        <TR>
+          <TD><FONT FACE="Arial,Helvetica" SIZE="-1"><B>Happiness</B></FONT></TD>
+          <TD>
+            <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+              <TR>
+                <TD WIDTH="{{ [pet.happiness|int, 1]|max }}%"
+                    BGCOLOR="#DDDD00" HEIGHT="12"><FONT SIZE="-2">&nbsp;</FONT></TD>
+                <TD WIDTH="{{ [100 - pet.happiness|int, 0]|max }}%"
+                    BGCOLOR="#CCCCCC" HEIGHT="12"><FONT SIZE="-2">&nbsp;</FONT></TD>
+              </TR>
+            </TABLE>
+          </TD>
+          <TD ALIGN="RIGHT"><FONT FACE="Arial,Helvetica" SIZE="-1">{{ pet.happiness }}%</FONT></TD>
+        </TR>
+
+        <!-- Cleanliness -->
+        <TR BGCOLOR="#F8F8F8">
+          <TD><FONT FACE="Arial,Helvetica" SIZE="-1"><B>Cleanliness</B></FONT></TD>
+          <TD>
+            <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+              <TR>
+                <TD WIDTH="{{ [pet.cleanliness|int, 1]|max }}%"
+                    BGCOLOR="#0099FF" HEIGHT="12"><FONT SIZE="-2">&nbsp;</FONT></TD>
+                <TD WIDTH="{{ [100 - pet.cleanliness|int, 0]|max }}%"
+                    BGCOLOR="#CCCCCC" HEIGHT="12"><FONT SIZE="-2">&nbsp;</FONT></TD>
+              </TR>
+            </TABLE>
+          </TD>
+          <TD ALIGN="RIGHT"><FONT FACE="Arial,Helvetica" SIZE="-1">{{ pet.cleanliness }}%</FONT></TD>
+        </TR>
+
+      </TABLE>
+
+      <BR>
+
+      <TABLE BORDER="1" CELLPADDING="4" CELLSPACING="0" WIDTH="100%" BORDERCOLOR="#808080" BGCOLOR="#FFFFCC">
+        <TR BGCOLOR="#C0C0C0">
+          <TD><FONT FACE="Arial,Helvetica" SIZE="-1"><B>&#9658; Status Summary</B></FONT></TD>
+        </TR>
+        <TR>
+          <TD>
+            <FONT FACE="Times New Roman,serif">
+            {% if not pet.is_alive %}
+              <FONT COLOR="#FF0000"><B>{{ pet.name }} has passed away. Rest in peace, little one.</B></FONT>
+            {% elif pet.health > 75 %}
+              <FONT COLOR="#008000"><B>{{ pet.name }} is doing great! Keep up the good work!</B></FONT>
+            {% elif pet.health > 50 %}
+              <FONT COLOR="#FF8800"><B>{{ pet.name }} is doing okay but could use some attention.</B></FONT>
+            {% elif pet.health > 25 %}
+              <FONT COLOR="#FF4400"><B>{{ pet.name }} is not feeling well. Please take action soon!</B></FONT>
+            {% else %}
+              <FONT COLOR="#FF0000"><B>WARNING: {{ pet.name }} is in critical condition!</B></FONT>
+            {% endif %}
+            </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+
+    </TD>
+  </TR>
+</TABLE>
+
+<BR>
+<P>
+  <FONT FACE="Arial,Helvetica" SIZE="-1">
+    <A HREF="/api/pets">&lt;&lt; Back to My Pets</A>
+    &nbsp;|&nbsp;
+    <A HREF="/">Home</A>
+  </FONT>
+</P>
+{% endblock %}

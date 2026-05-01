@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}My Pets{% endblock %}
+
+{% block content %}
+<TABLE BORDER="0" CELLPADDING="4" CELLSPACING="0" WIDTH="100%">
+  <TR BGCOLOR="#400040">
+    <TD><FONT FACE="Arial,Helvetica" COLOR="#FFFFFF" SIZE="+1"><B>&#9658; My Pets</B></FONT></TD>
+  </TR>
+</TABLE>
+
+<BR>
+
+{% if pets %}
+<TABLE BORDER="1" CELLPADDING="4" CELLSPACING="0" WIDTH="100%" BORDERCOLOR="#808080">
+  <TR BGCOLOR="#C0C0C0">
+    <TH ALIGN="LEFT"><FONT FACE="Arial,Helvetica" SIZE="-1">Name</FONT></TH>
+    <TH><FONT FACE="Arial,Helvetica" SIZE="-1">Status</FONT></TH>
+    <TH><FONT FACE="Arial,Helvetica" SIZE="-1">Age</FONT></TH>
+    <TH><FONT FACE="Arial,Helvetica" SIZE="-1">Health</FONT></TH>
+    <TH><FONT FACE="Arial,Helvetica" SIZE="-1">Hunger</FONT></TH>
+    <TH><FONT FACE="Arial,Helvetica" SIZE="-1">Happiness</FONT></TH>
+    <TH><FONT FACE="Arial,Helvetica" SIZE="-1">Cleanliness</FONT></TH>
+    <TH><FONT FACE="Arial,Helvetica" SIZE="-1">Details</FONT></TH>
+  </TR>
+  {% for pet in pets %}
+  <TR BGCOLOR="{% if loop.index is odd %}#FFFFFF{% else %}#F0F0F0{% endif %}">
+    <TD><FONT FACE="Arial,Helvetica" SIZE="-1"><B>{{ pet.name }}</B></FONT></TD>
+    <TD ALIGN="CENTER">
+      <FONT FACE="Arial,Helvetica" SIZE="-1">
+      {% if pet.is_alive %}
+        <FONT COLOR="#008000"><B>Alive</B></FONT>
+      {% else %}
+        <FONT COLOR="#FF0000"><B>Deceased</B></FONT>
+      {% endif %}
+      </FONT>
+    </TD>
+    <TD ALIGN="CENTER"><FONT FACE="Arial,Helvetica" SIZE="-1">{{ pet.age }}</FONT></TD>
+    <TD ALIGN="CENTER">
+      <FONT FACE="Arial,Helvetica" SIZE="-1"
+            COLOR="{% if pet.health > 50 %}#008000{% elif pet.health > 20 %}#FF8800{% else %}#FF0000{% endif %}">
+        {{ pet.health }}%
+      </FONT>
+    </TD>
+    <TD ALIGN="CENTER"><FONT FACE="Arial,Helvetica" SIZE="-1">{{ pet.hunger }}%</FONT></TD>
+    <TD ALIGN="CENTER"><FONT FACE="Arial,Helvetica" SIZE="-1">{{ pet.happiness }}%</FONT></TD>
+    <TD ALIGN="CENTER"><FONT FACE="Arial,Helvetica" SIZE="-1">{{ pet.cleanliness }}%</FONT></TD>
+    <TD ALIGN="CENTER"><FONT FACE="Arial,Helvetica" SIZE="-1"><A HREF="/api/pets/{{ pet.id }}">View</A></FONT></TD>
+  </TR>
+  {% endfor %}
+</TABLE>
+{% else %}
+<P>
+  <FONT FACE="Times New Roman,serif">
+    You have no pets yet! Create your first pet by sending a
+    <TT>POST</TT> request to <TT>/api/pets</TT>.
+  </FONT>
+</P>
+{% endif %}
+
+<BR>
+<P><FONT FACE="Arial,Helvetica" SIZE="-1"><A HREF="/">&lt;&lt; Back to Home</A></FONT></P>
+{% endblock %}

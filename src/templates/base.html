@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<TITLE>{% block title %}Tamagotchi APP&#176;{% endblock %} - Tamagotchi APP&#176;</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="description" CONTENT="Tamagotchi APP&#176; - Virtual Pet Portal">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#551A8B" ALINK="#FF0000"
+      TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+
+<TABLE BORDER="0" CELLPADDING="4" CELLSPACING="0" WIDTH="100%">
+  <TR BGCOLOR="#400040">
+    <TD WIDTH="80%">
+      <FONT FACE="Arial,Helvetica" COLOR="#FFFF00" SIZE="+3"><B>TAMAGOTCHI APP&#176;</B></FONT>
+      &nbsp;&nbsp;
+      <FONT FACE="Arial,Helvetica" COLOR="#FF9900" SIZE="-1">Virtual Pet Portal</FONT>
+    </TD>
+    <TD WIDTH="20%" ALIGN="RIGHT">
+      <FONT FACE="Arial,Helvetica" COLOR="#FFFFFF" SIZE="-2">Est. 1996</FONT>
+    </TD>
+  </TR>
+  <TR BGCOLOR="#800040">
+    <TD COLSPAN="2" CELLPADDING="3">
+      <FONT FACE="Arial,Helvetica" SIZE="-1">
+        <A HREF="/"><FONT COLOR="#FFFF00"><B>Home</B></FONT></A>
+        &nbsp;|&nbsp;
+        <A HREF="/api/pets"><FONT COLOR="#FFFFFF">My Pets</FONT></A>
+      </FONT>
+    </TD>
+  </TR>
+</TABLE>
+
+<TABLE BORDER="0" CELLPADDING="8" CELLSPACING="0" WIDTH="100%">
+  <TR>
+    <TD>
+      {% block content %}{% endblock %}
+    </TD>
+  </TR>
+</TABLE>
+
+<HR NOSHADE SIZE="2">
+<TABLE BORDER="0" WIDTH="100%">
+  <TR>
+    <TD ALIGN="CENTER">
+      <FONT FACE="Arial,Helvetica" SIZE="-2" COLOR="#666666">
+        Copyright &copy; 1998 Tamagotchi APP&#176; Inc. All rights reserved.
+        &nbsp;|&nbsp;
+        <A HREF="/">Help</A>
+        &nbsp;|&nbsp;
+        <A HREF="/">Privacy Policy</A>
+      </FONT>
+    </TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>
