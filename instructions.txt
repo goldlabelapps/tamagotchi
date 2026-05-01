@@ -1,0 +1,64 @@
+# Tamagotchi Python App Roadmap
+
+This document provides a clear, step-by-step roadmap for building a Tamagotchi game in Python. It is intended for developers or agents bootstrapping the project.
+
+## 1. Project Initialization
+- Create a new Python project directory structure:
+  - src/
+  - tests/
+  - requirements.txt
+  - README.md
+  - .gitignore
+
+## 2. Set Up Virtual Environment
+- Initialize a virtual environment (venv, pipenv, or poetry)
+- Install core dependencies (add to requirements.txt):
+  - Flask or FastAPI (for web API)
+  - SQLAlchemy (ORM)
+  - psycopg2 (Postgres driver)
+  - pytest (for testing)
+
+## 3. Database Design
+- Design a simple schema for users and pets:
+  - User: id, username, email, password_hash
+  - Pet: id, user_id, name, age, hunger, happiness, cleanliness, health, last_updated
+- Create SQLAlchemy models for these tables
+- Set up database connection configuration
+
+## 4. Core Game Logic
+- Implement Tamagotchi pet lifecycle logic:
+  - Feeding (increases hunger, may affect health)
+  - Playing (increases happiness, may affect hunger)
+  - Cleaning (increases cleanliness)
+  - Health (affected by hunger, happiness, cleanliness)
+  - Time-based state decay (use background tasks or scheduled jobs)
+
+## 5. API Endpoints
+- Create RESTful endpoints for:
+  - Register/login user
+  - Create/select pet
+  - Feed/play/clean pet
+  - Get pet status
+
+## 6. User Interface (Optional)
+- CLI: Simple command-line interface for interacting with the pet
+- Web: Basic web UI using Flask/FastAPI templates or a frontend framework
+
+## 7. Testing
+- Write unit tests for game logic and API endpoints
+- Use pytest for test automation
+
+## 8. Deployment
+- Prepare for deployment on Render.com:
+  - Add a Procfile or equivalent
+  - Set up environment variables for database credentials
+  - Document deployment steps in README
+
+## 9. Future Enhancements
+- Multi-tenant support (multiple pets per user)
+- Pet evolution and random events
+- Notifications/reminders
+- Leaderboards or achievements
+
+---
+_This roadmap is a living document. Update as the project evolves._
