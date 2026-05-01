@@ -17,6 +17,10 @@ def create_app(config_class=Config):
     app.register_blueprint(auth_bp)
     app.register_blueprint(pets_bp)
 
+    @app.route("/")
+    def home():
+        return "<h1>Tamagotchi APP°</h1>", 200
+
     with app.app_context():
         db.create_all()
 

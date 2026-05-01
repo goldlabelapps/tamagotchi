@@ -1,10 +1,37 @@
-# Tamagotchi
+# Tamagotchi APP°
 
-Tamagotchi is a multi-tenant Python app that recreates the classic handheld digital pet experience via a REST API.
+Tamagotchi APP° is a multi-tenant Python app that recreates the classic handheld digital pet experience via a REST API.
 
 ## Background
 
-Tamagotchi was a handheld digital pet created in the 1990s. The toy required users to care for a virtual pet by feeding it, cleaning up after it, playing games, and monitoring its health and happiness. Neglecting the pet would result in it becoming sick or even dying, while attentive care would help it grow and thrive.
+Tamagotchi APP° was a handheld digital pet created in the 1990s. The toy required users to care for a virtual pet by feeding it, cleaning up after it, playing games, and monitoring its health and happiness. Neglecting the pet would result in it becoming sick or even dying, while attentive care would help it grow and thrive.
+
+## Code
+
+Stat decay rates per hour (how much each stat decreases every hour)
+
+```python
+HUNGER_DECAY_PER_HOUR = 10.0      # pet gets hungrier over time
+HAPPINESS_DECAY_PER_HOUR = 8.0    # pet gets sadder over time
+CLEANLINESS_DECAY_PER_HOUR = 5.0  # pet gets dirtier over time
+
+# Action effect amounts
+FEED_HUNGER_GAIN = 30.0
+FEED_HAPPINESS_GAIN = 5.0
+
+PLAY_HAPPINESS_GAIN = 25.0
+PLAY_HUNGER_COST = 10.0
+
+CLEAN_CLEANLINESS_GAIN = 40.0
+
+# Health thresholds — below these values health starts to drop
+HUNGER_CRITICAL_THRESHOLD = 20.0
+HAPPINESS_CRITICAL_THRESHOLD = 20.0
+CLEANLINESS_CRITICAL_THRESHOLD = 20.0
+
+HEALTH_DECAY_PER_POOR_STAT = 5.0  # health lost per hour for each stat below threshold
+AGE_GAIN_PER_HOUR = 1             # age increases every hour (in game units)
+```
 
 ## Features
 - Multi-tenant support (multiple users, each with their own pets)
@@ -28,7 +55,7 @@ src/
   app.py        # Flask application factory
   config.py     # Configuration classes
   models.py     # SQLAlchemy models (User, Pet)
-  game.py       # Core Tamagotchi game logic
+  game.py       # Core Tamagotchi APP° game logic
   routes/
     auth.py     # Register / login endpoints
     pets.py     # Pet CRUD and action endpoints

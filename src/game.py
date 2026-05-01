@@ -1,4 +1,4 @@
-"""Core Tamagotchi game logic."""
+"""Core Tamagotchi APP° game logic."""
 
 from datetime import datetime, timezone
 
