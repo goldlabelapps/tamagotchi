@@ -1,6 +1,6 @@
-# Tamagotchi Python App Roadmap
+# Tamagotchi APP° Python App Roadmap
 
-This document provides a clear, step-by-step roadmap for building a Tamagotchi game in Python. It is intended for developers or agents bootstrapping the project.
+This document provides a clear, step-by-step roadmap for building a Tamagotchi APP° game in Python. It is intended for developers or agents bootstrapping the project.
 
 ## 1. Project Initialization
 - Create a new Python project directory structure:
@@ -26,7 +26,7 @@ This document provides a clear, step-by-step roadmap for building a Tamagotchi g
 - Set up database connection configuration
 
 ## 4. Core Game Logic
-- Implement Tamagotchi pet lifecycle logic:
+- Implement Tamagotchi APP° pet lifecycle logic:
   - Feeding (increases hunger, may affect health)
   - Playing (increases happiness, may affect hunger)
   - Cleaning (increases cleanliness)
