@@ -1,7 +1,7 @@
 
 # Tamagotchi APP°
 
-## Documentation Table of Contents
+## Table of Contents
 
 | # | Document | What you'll learn |
 |---|----------|-------------------|
@@ -19,16 +19,11 @@
 | 12 | [CI/CD with GitHub Actions](docs/cicd.md) | Continuous integration, automated testing, and deployment pipelines |
 | 13 | [API Reference](docs/api-reference.md) | Complete endpoint reference with request/response examples |
 
-
-Tamagotchi APP° is a multi-tenant Python app that recreates the classic handheld digital pet experience via a REST API.
-
-## Background
+## The Game
 
 Tamagotchi APP° was a handheld digital pet created in the 1990s. The toy required users to care for a virtual pet by feeding it, cleaning up after it, playing games, and monitoring its health and happiness. Neglecting the pet would result in it becoming sick or even dying, while attentive care would help it grow and thrive.
 
-## Code
-
-Stat decay rates per hour (how much each stat decreases every hour)
+How does the look in code? 
 
 ```python
 HUNGER_DECAY_PER_HOUR = 10.0      # pet gets hungrier over time
