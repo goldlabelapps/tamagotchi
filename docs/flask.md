@@ -4,8 +4,6 @@ Flask is a **micro web framework** for Python. "Micro" does not mean it is limit
 
 This project uses Flask 3, the current major version.
 
----
-
 ## Why Flask?
 
 | Concern | Flask's answer |
@@ -17,8 +15,6 @@ This project uses Flask 3, the current major version.
 | Render HTML | Jinja2 template engine (built-in) |
 
 Flask alternatives include Django (more opinionated, larger, full-featured) and FastAPI (async, automatically generated docs). Flask is a great first framework because its source code is small enough to read and understand.
-
----
 
 ## How Flask is Used in this Project
 
@@ -61,8 +57,6 @@ Instead of creating the Flask app as a module-level global, `create_app()` is a 
 - **Multiple instances** — you can run multiple copies of the app in the same process (useful for testing).
 - **Deferred initialisation** — extensions like SQLAlchemy are configured with the app inside the factory, avoiding circular imports.
 
----
-
 ### 2. Blueprints (`src/routes/auth.py`, `src/routes/pets.py`)
 
 A Blueprint is a collection of routes (and other things) that can be registered on an application. Think of it as a mini-application that gets plugged in.
@@ -89,8 +83,6 @@ The `url_prefix="/api/auth"` means every route in this blueprint automatically s
 - `url_prefix` keeps URL namespacing clean
 - Blueprints can be registered (or not) depending on configuration
 
----
-
 ### 3. Routing
 
 Flask maps URL patterns to Python functions using decorators:
@@ -113,8 +105,6 @@ def feed_pet(pet_id: int):
 
 Common converters: `<string:name>`, `<int:id>`, `<float:value>`, `<path:subpath>`.
 
----
-
 ### 4. The Request Object
 
 `flask.request` is a thread-local proxy that gives access to the current HTTP request:
@@ -127,8 +117,6 @@ name = data.get("name")                       # read a field
 ```
 
 `silent=True` means Flask returns `None` instead of raising an error if the body is not valid JSON.
-
----
 
 ### 5. Responses
 
@@ -147,8 +135,6 @@ return jsonify({"error": "pet not found"}), 404
 
 Flask routes return a tuple of `(response_body, status_code)`. When you omit the status code Flask uses 200.
 
----
-
 ### 6. Content Negotiation
 
 The pets routes return JSON *or* HTML depending on what the client asks for:
@@ -162,8 +148,6 @@ return jsonify({"pets": pet_dicts}), 200
 
 A browser sends `Accept: text/html` by default, so it gets a rendered page. An API client (e.g. `curl` or Python's `requests` library) typically sends `Accept: application/json` and gets JSON back.
 
----
-
 ### 7. The Application Context
 
 Flask has a concept of an **application context** — a scope that makes the current app available to extensions. The `with app.app_context():` block in `create_app()` ensures the database can be accessed during setup:
@@ -174,8 +158,6 @@ with app.app_context():
 ```
 
 You will encounter `app_context` in tests too (`conftest.py`).
-
----
 
 ## Key Flask Concepts Summary
 
@@ -189,8 +171,6 @@ You will encounter `app_context` in tests too (`conftest.py`).
 | JSON response | `jsonify(...)` |
 | HTML response | `render_template(...)` |
 | Application context | `with app.app_context():` |
-
----
 
 ## Further Reading
 

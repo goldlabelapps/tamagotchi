@@ -2,8 +2,6 @@
 
 The Tamagotchi app is a **REST API**. Understanding what that means — and the conventions that come with it — will help you read the route code and write clients that consume it.
 
----
-
 ## 1. What is an API?
 
 An **API** (Application Programming Interface) is a defined way for two programs to talk to each other. A **web API** uses HTTP as the communication channel: the client sends an HTTP request; the server processes it and sends an HTTP response.
@@ -14,8 +12,6 @@ Examples of clients for this API:
 - `curl` in a terminal
 - A Python script using the `requests` library
 - The automated tests in `tests/test_api.py`
-
----
 
 ## 2. HTTP in Brief
 
@@ -54,8 +50,6 @@ Content-Type: application/json
 | **Headers** | Metadata about the response |
 | **Body** | The data returned (JSON here) |
 
----
-
 ## 3. HTTP Methods
 
 REST uses different HTTP methods to convey intent:
@@ -75,8 +69,6 @@ In Flask, method-specific decorators make this explicit:
 @pets_bp.post("")          # POST /api/pets
 @pets_bp.post("/<int:pet_id>/feed")   # POST /api/pets/42/feed
 ```
-
----
 
 ## 4. Status Codes
 
@@ -98,8 +90,6 @@ HTTP status codes are three-digit numbers grouped by category:
 | `401 Unauthorized` | Not authenticated | No/invalid token |
 | `404 Not Found` | Resource does not exist | Pet ID not found |
 | `409 Conflict` | Conflict with current state | Duplicate username; acting on dead pet |
-
----
 
 ## 5. JSON
 
@@ -127,8 +117,6 @@ And writes JSON to a response with:
 return jsonify({"pet": pet.to_dict()}), 200
 ```
 
----
-
 ## 6. REST Conventions
 
 REST is an architectural *style*, not a strict standard. The conventions used in this project are common across the industry:
@@ -153,8 +141,6 @@ GET the collection → list of resources
 POST the collection → create a new resource  
 GET a single resource → get its details  
 POST an action on a resource → perform that action  
-
----
 
 ## 7. Calling the API — Examples
 
@@ -209,8 +195,6 @@ result = requests.post(f"{BASE}/api/pets/{pet['id']}/feed", headers=headers).jso
 print(result["message"])   # "Pikachu enjoyed the meal!"
 ```
 
----
-
 ## 8. The `Authorization` Header
 
 Protected routes require the token to be sent in the `Authorization` header using the **Bearer** scheme:
@@ -220,8 +204,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 Flask-JWT-Extended reads this header automatically when a route is decorated with `@jwt_required()`.
-
----
 
 ## Further Reading
 

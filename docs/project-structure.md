@@ -2,8 +2,6 @@
 
 Understanding how the files in this repository are organised is the first step to reading and changing the code with confidence.
 
----
-
 ## Directory Tree
 
 ```
@@ -41,8 +39,6 @@ tamagotchi/
 └── README.md                # High-level project overview
 ```
 
----
-
 ## Why This Layout?
 
 ### `src/` — source package
@@ -68,8 +64,6 @@ Keeping game logic in `game.py` — separate from the Flask routes — means you
 
 The test directory mirrors the source structure. `test_game.py` tests `src/game.py`; `test_api.py` tests the routes. This makes it easy to find the relevant tests when editing any given file.
 
----
-
 ## The Request Lifecycle
 
 Here is what happens when a browser or API client sends a request:
@@ -93,8 +87,6 @@ HTTP Request
      ▼
 HTTP Response (JSON or HTML)
 ```
-
----
 
 ## Key Python Concepts Illustrated Here
 

@@ -2,8 +2,6 @@
 
 **CI/CD** stands for **Continuous Integration / Continuous Delivery** (or Deployment). It is the practice of automatically building, testing, and deploying your code every time you push a change. This document explains the concepts and shows how to set up a CI/CD pipeline for this project using **GitHub Actions**.
 
----
-
 ## 1. What is Continuous Integration (CI)?
 
 Before CI, developers would work independently for days or weeks and then merge their branches — often discovering that the combined code was broken. CI solves this by:
@@ -16,16 +14,12 @@ Before CI, developers would work independently for days or weeks and then merge 
 
 For this project, CI means: *every time someone pushes code, pytest runs automatically*.
 
----
-
 ## 2. What is Continuous Delivery/Deployment (CD)?
 
 - **Continuous Delivery** — after CI passes, a build artifact is prepared and *ready* to deploy with one click.
 - **Continuous Deployment** — the deployment to production happens *automatically* after CI passes, with no human step.
 
 For this project, CD means: *if the tests pass on the main branch, deploy to Render.com automatically*.
-
----
 
 ## 3. GitHub Actions
 
@@ -41,8 +35,6 @@ Key concepts:
 | **Step** | A single shell command or reusable Action |
 | **Action** | A reusable unit of CI logic published on the GitHub marketplace |
 | **Runner** | The virtual machine that executes the job (`ubuntu-latest`, `windows-latest`, etc.) |
-
----
 
 ## 4. Example CI Workflow
 
@@ -89,8 +81,6 @@ jobs:
 4. **Installs dependencies** from `requirements.txt`.
 5. **Runs pytest** — if any test fails, the job fails and GitHub shows a red cross on the commit/PR.
 
----
-
 ## 5. Adding Automated Deployment to Render
 
 Render supports deploy hooks — a URL you POST to in order to trigger a deployment.
@@ -117,8 +107,6 @@ Now the full flow is:
 Push to main → CI tests run → (if pass) → Render deployment triggered
 ```
 
----
-
 ## 6. GitHub Actions Secrets
 
 Never hard-code API keys, tokens, or passwords in workflow files. Use **GitHub Actions secrets**:
@@ -130,8 +118,6 @@ env:
 
 Secrets are encrypted, not visible in logs, and only accessible to the repository's workflows. Set them at *Settings → Secrets and variables → Actions*.
 
----
-
 ## 7. Status Badges
 
 You can display the CI status in your `README.md` as a badge:
@@ -141,8 +127,6 @@ You can display the CI status in your `README.md` as a badge:
 ```
 
 This badge turns green when tests pass and red when they fail — visible to anyone viewing the repository.
-
----
 
 ## 8. Pull Request Checks
 
@@ -154,8 +138,6 @@ When CI is set up, GitHub displays check results directly on pull requests:
 ```
 
 You can configure **branch protection rules** (*Settings → Branches → Add rule*) to require CI to pass before a pull request can be merged. This prevents broken code from reaching `main`.
-
----
 
 ## 9. Full CI/CD Workflow File
 
@@ -190,8 +172,6 @@ jobs:
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
 ```
 
----
-
 ## 10. CI/CD Benefits Summary
 
 | Without CI/CD | With CI/CD |
@@ -200,8 +180,6 @@ jobs:
 | Broken code can reach production | Broken code is blocked before merge |
 | Deployment is a manual, error-prone step | Deployment is automatic and reproducible |
 | "Works on my machine" | Tested in a clean, consistent environment |
-
----
 
 ## Further Reading
 

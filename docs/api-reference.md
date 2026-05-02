@@ -5,16 +5,12 @@ Complete reference for every endpoint in the Tamagotchi APP° REST API.
 All requests and responses use **JSON** (`Content-Type: application/json`).  
 Protected endpoints require the `Authorization: Bearer <token>` header.
 
----
-
 ## Base URL
 
 | Environment | Base URL |
 |-------------|----------|
 | Local development | `http://localhost:5555` |
 | Production (Render) | `https://<your-service>.onrender.com` |
-
----
 
 ## Authentication
 
@@ -63,8 +59,6 @@ Create a new user account. Returns a JWT access token.
 { "error": "username or email already in use" }
 ```
 
----
-
 ### POST `/api/auth/login`
 
 Log in with an existing account. Returns a JWT access token.
@@ -103,8 +97,6 @@ Log in with an existing account. Returns a JWT access token.
 { "error": "invalid credentials" }
 ```
 
----
-
 ## Pets
 
 All pet endpoints require authentication: include the JWT token in the `Authorization` header.
@@ -112,8 +104,6 @@ All pet endpoints require authentication: include the JWT token in the `Authoriz
 ```
 Authorization: Bearer eyJhbGci...
 ```
-
----
 
 ### POST `/api/pets`
 
@@ -153,8 +143,6 @@ Create a new virtual pet for the authenticated user.
 
 `401 Unauthorized` — no or invalid token
 
----
-
 ### GET `/api/pets`
 
 List all pets belonging to the authenticated user. Time decay is **not** applied on this endpoint (stats may be slightly stale).
@@ -184,8 +172,6 @@ Returns JSON when `Accept: application/json`; returns HTML when `Accept: text/ht
 ```
 
 `401 Unauthorized` — no or invalid token
-
----
 
 ### GET `/api/pets/<id>`
 
@@ -219,8 +205,6 @@ Returns JSON or HTML depending on the `Accept` header.
 `401 Unauthorized` — no or invalid token  
 `404 Not Found` — pet does not exist or belongs to another user
 
----
-
 ### POST `/api/pets/<id>/feed`
 
 Feed the pet. Increases hunger by 30 and happiness by 5.
@@ -249,8 +233,6 @@ Feed the pet. Increases hunger by 30 and happiness by 5.
 
 `401 Unauthorized` — no or invalid token  
 `404 Not Found` — pet not found
-
----
 
 ### POST `/api/pets/<id>/play`
 
@@ -281,8 +263,6 @@ Play with the pet. Increases happiness by 25; decreases hunger by 10.
 `401 Unauthorized` — no or invalid token  
 `404 Not Found` — pet not found
 
----
-
 ### POST `/api/pets/<id>/clean`
 
 Clean the pet. Increases cleanliness by 40.
@@ -312,8 +292,6 @@ Clean the pet. Increases cleanliness by 40.
 `401 Unauthorized` — no or invalid token  
 `404 Not Found` — pet not found
 
----
-
 ## Pet Object Schema
 
 All pet endpoints return a pet object with the following fields:
@@ -332,8 +310,6 @@ All pet endpoints return a pet object with the following fields:
 | `last_updated` | ISO 8601 string | When stats were last calculated |
 | `created_at` | ISO 8601 string | When the pet was created |
 
----
-
 ## Stat Decay Constants
 
 | Stat | Decays by (per hour) | Critical threshold | Effect when critical |
@@ -342,8 +318,6 @@ All pet endpoints return a pet object with the following fields:
 | `happiness` | 8 | < 20 | Health decays by 5/hr per critical stat |
 | `cleanliness` | 5 | < 20 | Health decays by 5/hr per critical stat |
 | `health` | 0 (indirect) | 0 | Pet dies (`is_alive = false`) |
-
----
 
 ## Action Effects Summary
 

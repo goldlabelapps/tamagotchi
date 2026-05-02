@@ -2,8 +2,6 @@
 
 Almost every web application needs to store data that persists beyond a single request. This project uses a **relational database** managed through **SQLAlchemy**, Python's most popular database toolkit.
 
----
-
 ## 1. Relational Databases in One Minute
 
 A relational database stores data in **tables** (like spreadsheet sheets). Each row is a record; each column is a field.
@@ -31,8 +29,6 @@ The `user_id` column in `pets` is a **foreign key** — it references the `id` c
 
 This project uses **SQLite** during development (a file-based database, no server needed) and **PostgreSQL** in production on Render.com.
 
----
-
 ## 2. What is an ORM?
 
 Writing raw SQL is powerful but tedious and error-prone:
@@ -49,8 +45,6 @@ print(pet.name)   # "Pikachu"
 ```
 
 SQLAlchemy is the standard ORM for Python. **Flask-SQLAlchemy** wraps it with Flask-friendly helpers.
-
----
 
 ## 3. The Models (`src/models.py`)
 
@@ -114,8 +108,6 @@ class Pet(db.Model):
 
 `db.ForeignKey("users.id")` tells SQLAlchemy that `user_id` references the `id` column in the `users` table.
 
----
-
 ## 4. Relationships
 
 The `db.relationship()` call on `User` tells SQLAlchemy how the two tables are connected:
@@ -141,8 +133,6 @@ pet = Pet.query.get(42)
 print(pet.owner.username)   # backref lets you navigate from pet → user
 ```
 
----
-
 ## 5. Creating Tables
 
 `db.create_all()` reads all model classes and creates any tables that do not already exist:
@@ -153,8 +143,6 @@ with app.app_context():
 ```
 
 This is called every time the app starts (see `src/app.py`). It is safe to run repeatedly — it skips tables that already exist. For schema *changes* on an existing database you would need a migration tool like **Flask-Migrate** (Alembic). This project keeps things simple and just recreates tables in testing.
-
----
 
 ## 6. The Session — Reading and Writing Data
 
@@ -181,8 +169,6 @@ db.session.commit()       # DELETE executed here
 
 In this project, `db.session.commit()` is called in each route handler *after* the game logic runs, to persist changes.
 
----
-
 ## 7. `to_dict()` — Serialising for JSON
 
 SQLAlchemy model objects cannot be sent directly as JSON. Each model has a `to_dict()` method that converts it to a plain Python dictionary:
@@ -199,8 +185,6 @@ def to_dict(self) -> dict:
 
 Flask's `jsonify()` then turns the dictionary into a JSON response.
 
----
-
 ## 8. SQLite vs PostgreSQL
 
 | | SQLite | PostgreSQL |
@@ -216,8 +200,6 @@ Render.com provides managed PostgreSQL. The `Config` class contains a small fix 
 if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
     SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
 ```
-
----
 
 ## Further Reading
 

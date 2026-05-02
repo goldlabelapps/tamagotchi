@@ -59,6 +59,4 @@ This document provides a clear, step-by-step roadmap for building a Tamagotchi A
 - Pet evolution and random events
 - Notifications/reminders
 - Leaderboards or achievements
-
----
 _This roadmap is a living document. Update as the project evolves._

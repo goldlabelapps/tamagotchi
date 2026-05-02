@@ -2,8 +2,6 @@
 
 Most web applications need to know *who* is making a request before they do anything sensitive. This project uses **JSON Web Tokens (JWTs)** to authenticate users. Before exploring JWTs, it is worth understanding how passwords are stored safely.
 
----
-
 ## 1. Never Store Passwords in Plain Text
 
 If an attacker gains read access to your database (a SQL injection, a leaked backup, a misconfigured server), you do not want them to find cleartext passwords. The standard solution is a **password hash**.
@@ -35,8 +33,6 @@ class User(db.Model):
 
 `generate_password_hash` uses **PBKDF2-HMAC-SHA256** with a random salt by default — a battle-tested algorithm for password storage.
 
----
-
 ## 2. The Problem JWTs Solve
 
 HTTP is **stateless** — every request arrives independently. A server does not remember who you are from one request to the next. Two traditional approaches exist:
@@ -45,8 +41,6 @@ HTTP is **stateless** — every request arrives independently. A server does not
 2. **Tokens** — the server creates a signed token containing the user's identity and gives it to the client. The client sends the token with every request. The server *verifies the signature* without looking anything up.
 
 JWTs are the most common token format for REST APIs.
-
----
 
 ## 3. What is a JWT?
 
@@ -67,8 +61,6 @@ SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c       ← Signature
 **Signature** — `HMAC_SHA256(base64(header) + "." + base64(payload), SECRET_KEY)`. Only the server, which knows `JWT_SECRET_KEY`, can create or verify this signature.
 
 > **Important**: the payload is *encoded*, not *encrypted*. Anyone can read the claims by Base64-decoding them. Never put sensitive data (passwords, credit cards) in a JWT payload.
-
----
 
 ## 4. Auth Flow in this Project
 
@@ -92,8 +84,6 @@ Client                                    Server
   │                                          │ 3. Run business logic
   │◀──────────────────────────────  { pet: {...} }
 ```
-
----
 
 ## 5. Registration (`src/routes/auth.py`)
 
@@ -126,8 +116,6 @@ def register():
     return jsonify({"user": user.to_dict(), "access_token": token}), 201
 ```
 
----
-
 ## 6. Login (`src/routes/auth.py`)
 
 ```python
@@ -147,8 +135,6 @@ def login():
 
 Notice the error message is deliberately vague ("invalid credentials") whether the username does not exist *or* the password is wrong. This prevents **username enumeration** — an attacker learning which usernames exist by checking whether the error says "user not found" vs "wrong password".
 
----
-
 ## 7. Protected Routes
 
 The `@jwt_required()` decorator from Flask-JWT-Extended checks for a valid token:
@@ -166,8 +152,6 @@ def list_pets():
 
 If the `Authorization: Bearer <token>` header is missing or the token is invalid/expired, Flask-JWT-Extended automatically returns a 401 Unauthorized response.
 
----
-
 ## 8. Token Expiry
 
 In `src/config.py`:
@@ -183,8 +167,6 @@ class TestingConfig(Config):
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=5)
 ```
 
----
-
 ## 9. Security Best Practices Illustrated
 
 | Practice | Where |
@@ -195,8 +177,6 @@ class TestingConfig(Config):
 | Tokens expire | `JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24)` |
 | Vague error messages for auth failures | Login returns "invalid credentials" regardless of reason |
 | Multi-tenancy isolation | Routes filter by `user_id` from the token, not from the request body |
-
----
 
 ## Further Reading
 
