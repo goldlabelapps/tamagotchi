@@ -4,8 +4,6 @@ Welcome to the Tamagotchi APP° documentation. This project is a multi-tenant vi
 
 If you are new to Python web development, work through these documents in order. Each one covers a distinct concept used in this codebase, with enough background that you understand *why* each tool or pattern exists — not just how to use it.
 
----
-
 ## Table of Contents
 
 | # | Document | What you'll learn |
@@ -23,8 +21,6 @@ If you are new to Python web development, work through these documents in order.
 | 11 | [Deployment on Render.com](deployment-render.md) | Gunicorn, the Procfile, Postgres, and deploying to the cloud |
 | 12 | [CI/CD with GitHub Actions](cicd.md) | Continuous integration, automated testing, and deployment pipelines |
 | 13 | [API Reference](api-reference.md) | Complete endpoint reference with request/response examples |
-
----
 
 ## Quick-start Cheat Sheet
 
@@ -47,8 +43,6 @@ python wsgi.py
 # 5. Run tests
 pytest tests/ -v
 ```
-
----
 
 ## Technology Map
 

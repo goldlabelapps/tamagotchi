@@ -2,8 +2,6 @@
 
 A well-structured application separates its *code* (logic) from its *configuration* (settings that change between environments). This project does that with a `Config` class and environment variables.
 
----
-
 ## 1. The Problem
 
 Consider a database URL. In development you might use:
@@ -22,8 +20,6 @@ You do not want to hard-code the production URL into the source code because:
 - It changes between environments
 - It often contains credentials (passwords) that must never appear in version control
 
----
-
 ## 2. Environment Variables
 
 An environment variable is a key-value pair that lives in the *operating system* outside your application. Programs read them at runtime using `os.environ`.
@@ -41,8 +37,6 @@ db_url = os.environ.get("DATABASE_URL", "default") # returns "default" if not se
 ```
 
 On Render.com (and most cloud platforms) you set environment variables in the dashboard, never in source code.
-
----
 
 ## 3. The `.env` File and `python-dotenv`
 
@@ -65,8 +59,6 @@ Flask (via `python-dotenv`) picks this file up automatically when present. The `
 ```
 
 > **Rule**: `.env` is for local development only. Production secrets go in the cloud provider's dashboard.
-
----
 
 ## 4. The `Config` Class (`src/config.py`)
 
@@ -119,8 +111,6 @@ def create_app(config_class=Config):
 
 `app.config.from_object(Config)` reads all uppercase class attributes and loads them into Flask's config dictionary. In tests, `create_app(TestingConfig)` is used instead.
 
----
-
 ## 5. Config Reference
 
 | Variable | Default (dev) | Description |
@@ -132,8 +122,6 @@ def create_app(config_class=Config):
 | `SQLALCHEMY_TRACK_MODIFICATIONS` | `False` | Disables a deprecated SQLAlchemy feature that would generate unnecessary warnings |
 | `TESTING` | `False` (not set) | Enables Flask test mode (better error propagation) |
 
----
-
 ## 6. The Render.com URL Fix
 
 Render.com (and Heroku) provide the PostgreSQL connection URL with the scheme `postgres://`. SQLAlchemy requires `postgresql://`. The one-liner fix in `Config`:
@@ -144,8 +132,6 @@ if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
 ```
 
 The `1` at the end of `.replace()` means *replace only the first occurrence*, which is the correct and safe behaviour.
-
----
 
 ## 7. Testing Configuration
 
@@ -160,8 +146,6 @@ class TestingConfig(Config):
 - `"sqlite:///:memory:"` — the database lives in RAM and is destroyed after each test run, so tests never affect each other or production data.
 - Short token expiry — makes it practical to test token expiration without waiting 24 hours.
 
----
-
 ## 8. What *Not* to Put in Environment Variables
 
 Environment variables are great for secrets and settings that change per environment. They are not a good fit for:
@@ -169,8 +153,6 @@ Environment variables are great for secrets and settings that change per environ
 - Large structured data (use a config file)
 - Data that changes at runtime (use a database)
 - Non-secret constants that are the same everywhere (just hard-code them)
-
----
 
 ## Further Reading
 

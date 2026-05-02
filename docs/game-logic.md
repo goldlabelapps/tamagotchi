@@ -2,8 +2,6 @@
 
 The Tamagotchi pet mechanics are implemented in `src/game.py` — a pure Python module with no Flask or database code. This separation makes the logic easy to read, reason about, and test independently.
 
----
-
 ## 1. Pet Stats
 
 Every pet has four stats, each stored as a `float` in the range **0–100**:
@@ -16,8 +14,6 @@ Every pet has four stats, each stored as a `float` in the range **0–100**:
 | `health` | 100 | 100 = perfect, 0 = dead |
 
 `health` is special — it does not decay on its own but is damaged when other stats fall into the critical zone.
-
----
 
 ## 2. Time-Based Decay
 
@@ -57,8 +53,6 @@ def apply_time_decay(pet) -> None:
 
 The trade-off is that a pet's stats in the database may be "stale" (not yet reflecting elapsed time) until someone fetches the pet. This is fine for a game — the stats are always accurate *at the moment you check them*.
 
----
-
 ## 3. Health Decay
 
 When any stat falls below its critical threshold, `health` starts to decay:
@@ -83,8 +77,6 @@ if poor_stat_count > 0:
 
 `sum([True, False, True])` evaluates to `2` in Python because `True == 1` and `False == 0`. So if two stats are critical, health drops by `5 * 2 = 10` points per hour.
 
----
-
 ## 4. Aging
 
 ```python
@@ -94,8 +86,6 @@ pet.age += int(elapsed_hours * AGE_GAIN_PER_HOUR)
 ```
 
 Age is measured in game-hours. A pet that was created 5 hours ago has `age = 5`.
-
----
 
 ## 5. Pet Death
 
@@ -114,8 +104,6 @@ def feed(pet) -> dict:
     ...
 ```
 
----
-
 ## 6. The `_clamp` Helper
 
 ```python
@@ -124,8 +112,6 @@ def _clamp(value: float, min_val: float = 0.0, max_val: float = 100.0) -> float:
 ```
 
 `_clamp` ensures a value never goes outside a valid range. Stats can never go below 0 or above 100. The leading underscore in `_clamp` is a Python convention meaning "private to this module — not part of the public API".
-
----
 
 ## 7. Actions and Their Effects
 
@@ -159,8 +145,6 @@ Cleaning improves cleanliness (+40). The pet must be alive.
 
 `get_status()` applies time decay and returns the current pet state without making any other change. Every `GET /api/pets/<id>` request calls this so the returned stats are always up to date.
 
----
-
 ## 8. Return Values
 
 Every action function returns a dictionary:
@@ -187,8 +171,6 @@ status_code = 200 if result["success"] else 409
 return jsonify(result), status_code
 ```
 
----
-
 ## 9. Decay Timeline Example
 
 Suppose a pet starts with `hunger=50`, `happiness=50`, `cleanliness=100`, `health=100` and is not touched for **6 hours**:
@@ -214,8 +196,6 @@ After **another 2 hours** with no interaction:
 | cleanliness | `100 - 40 = 60` |
 
 All three might be below threshold now, so health decays faster. Eventually `health` reaches 0 and the pet dies.
-
----
 
 ## 10. Design Philosophy
 
