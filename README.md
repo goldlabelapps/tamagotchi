@@ -1,5 +1,7 @@
 
-# Tamagotchi APP°
+## Tamagotchi
+
+Tamagotchi was a handheld digital pet created in the 1990s. The toy required users to care for a virtual pet by feeding it, cleaning up after it, playing games, and monitoring its health and happiness. Neglecting the pet would result in it becoming sick or even dying, while attentive care would help it grow and thrive.
 
 | # | Document | What you'll learn |
 |---|----------|-------------------|
@@ -17,18 +19,16 @@
 | 12 | [CI/CD with GitHub Actions](docs/cicd.md) | Continuous integration, automated testing, and deployment pipelines |
 | 13 | [API Reference](docs/api-reference.md) | Complete endpoint reference with request/response examples |
 
-## The Game
+#### Features
 
-Tamagotchi APP° was a handheld digital pet created in the 1990s. The toy required users to care for a virtual pet by feeding it, cleaning up after it, playing games, and monitoring its health and happiness. Neglecting the pet would result in it becoming sick or even dying, while attentive care would help it grow and thrive.
-
-## Features
 - Multi-tenant support (multiple users, each with their own pets)
 - Virtual pet lifecycle: feeding, playing, cleaning, health, happiness
 - Time-based stat decay — neglect your pet and it will suffer!
 - Persistent state using SQLite (local) or Postgres (production)
 - JWT-authenticated REST API
 
-## Tech Stack
+#### Tech Stack
+
 - Python 3.12
 - Flask + Flask-JWT-Extended
 - SQLAlchemy ORM
@@ -36,7 +36,7 @@ Tamagotchi APP° was a handheld digital pet created in the 1990s. The toy requir
 - pytest
 - Render.com (deployment)
 
-## Contributing
-Contributions are welcome! Please open issues or submit pull requests for new features, bug fixes, or improvements.
-_This README will be updated as the project evolves._
+#### Contributing
+
+Contributions are welcome. Please open issues or submit pull requests for new features, bug fixes, or improvements.
 
