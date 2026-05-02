@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_jwt_extended import JWTManager
 
 from src.config import Config
@@ -19,7 +19,7 @@ def create_app(config_class=Config):
 
     @app.route("/")
     def home():
-        return "<h1>Tamagotchi APP°</h1>", 200
+        return render_template("home.html"), 200
 
     with app.app_context():
         db.create_all()

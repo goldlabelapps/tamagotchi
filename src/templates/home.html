@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<TABLE BORDER="0" CELLPADDING="4" CELLSPACING="4" WIDTH="100%">
+  <TR VALIGN="TOP">
+
+    <!-- Left column: main content -->
+    <TD WIDTH="65%" VALIGN="TOP">
+
+      <TABLE BORDER="0" CELLPADDING="4" CELLSPACING="0" WIDTH="100%">
+        <TR BGCOLOR="#400040">
+          <TD><FONT FACE="Arial,Helvetica" COLOR="#FFFFFF" SIZE="+1"><B>Welcome to Tamagotchi APP&#176;!</B></FONT></TD>
+        </TR>
+        <TR>
+          <TD>
+            <P>
+            <FONT FACE="Times New Roman,serif">
+            Welcome to <B>Tamagotchi APP&#176;</B>, your one-stop destination for virtual pet care!
+            Create, raise, and look after your very own virtual pet.
+            Feed it, play with it, and keep it clean to ensure a long and happy life.
+            </FONT>
+            </P>
+            <P>
+            <TT><FONT SIZE="-1">
+            &nbsp;&nbsp;.----.<BR>
+            &nbsp;/ o&nbsp;&nbsp;o \<BR>
+            |&nbsp;&nbsp;----&nbsp;&nbsp;|<BR>
+            |&nbsp;&nbsp;\__/&nbsp;&nbsp;|<BR>
+            &nbsp;\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<BR>
+            &nbsp;&nbsp;'----'
+            </FONT></TT>
+            </P>
+          </TD>
+        </TR>
+      </TABLE>
+
+      <BR>
+
+      <TABLE BORDER="1" CELLPADDING="4" CELLSPACING="0" WIDTH="100%" BORDERCOLOR="#808080">
+        <TR BGCOLOR="#C0C0C0">
+          <TD COLSPAN="2"><FONT FACE="Arial,Helvetica"><B>&#9658; Pet Categories</B></FONT></TD>
+        </TR>
+        <TR VALIGN="TOP">
+          <TD WIDTH="50%">
+            <FONT FACE="Arial,Helvetica" SIZE="-1">
+            <B><A HREF="/api/pets">My Pets</A></B><BR>
+            View and manage all your virtual pets
+            </FONT>
+          </TD>
+          <TD WIDTH="50%">
+            <FONT FACE="Arial,Helvetica" SIZE="-1">
+            <B>Pet Actions</B><BR>
+            Feed, play with, and clean your pets via the API
+            </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+
+    </TD>
+
+    <!-- Right column: sidebar -->
+    <TD WIDTH="35%" VALIGN="TOP">
+
+      <TABLE BORDER="1" CELLPADDING="4" CELLSPACING="0" WIDTH="100%" BORDERCOLOR="#400040">
+        <TR BGCOLOR="#400040">
+          <TD><FONT FACE="Arial,Helvetica" COLOR="#FFFFFF" SIZE="-1"><B>&#9658; What's New!</B></FONT></TD>
+        </TR>
+        <TR>
+          <TD>
+            <FONT FACE="Arial,Helvetica" SIZE="-2">
+            &#149; <B>NEW!</B> Multiple pets per user now supported!<BR>
+            &#149; Health system updated &mdash; take care of your pet!<BR>
+            &#149; Time-based stat decay is now LIVE!<BR>
+            &#149; <B>HOT!</B> Feed and play with your pet 24/7!
+            </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+
+      <BR>
+
+      <TABLE BORDER="1" CELLPADDING="4" CELLSPACING="0" WIDTH="100%" BORDERCOLOR="#400040">
+        <TR BGCOLOR="#400040">
+          <TD><FONT FACE="Arial,Helvetica" COLOR="#FFFFFF" SIZE="-1"><B>&#9658; Getting Started</B></FONT></TD>
+        </TR>
+        <TR>
+          <TD>
+            <FONT FACE="Arial,Helvetica" SIZE="-2">
+            1. Register via <TT>POST /api/auth/register</TT><BR>
+            2. Login via <TT>POST /api/auth/login</TT><BR>
+            3. Create a pet via <TT>POST /api/pets</TT><BR>
+            4. <A HREF="/api/pets">View your pets here!</A>
+            </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+
+    </TD>
+  </TR>
+</TABLE>
+{% endblock %}
